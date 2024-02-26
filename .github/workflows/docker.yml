@@ -9,6 +9,10 @@ jobs:
   docker:
     runs-on: ubuntu-22.04
 
+    strategy:
+      matrix:
+        target_arch: [arm, i386]
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -16,8 +20,9 @@ jobs:
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: windows-ce-build-environment
+        image: windows-ce-build-environment-${{ matrix.target_arch }}
         registry: ghcr.io
+        buildArgs: target_arch=${{ matrix.target_arch }}
         addLatest: true
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
