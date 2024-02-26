@@ -10,7 +10,7 @@ LABEL Description="Debian with CeGCC 9.3.0 (ENLYZE version for ${target_arch}) a
 
 ARG target_arch
 
-ENV PATH=/opt/cegcc-${target_arch}:$PATH
+ENV PATH=/opt/cegcc-${target_arch}/bin:$PATH
 
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends bison build-essential ca-certificates flex git libgmp-dev libmpc-dev libmpfr-dev texinfo
